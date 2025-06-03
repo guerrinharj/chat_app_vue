@@ -1,5 +1,6 @@
 <template>
     <div class="chat-page">
+        <NavBar />
         <h2>Bem-vindo, {{ username }}!</h2>
         <MensagemForm />
         <div class="mensagens">
@@ -13,12 +14,13 @@
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue'
 import MensagemForm from '@/components/MensagemForm.vue';
 import MensagemItem from '@/components/MensagemItem.vue';
 import { mapGetters } from 'vuex';
 
 export default {
-    components: { MensagemForm, MensagemItem },
+    components: { NavBar, MensagemForm, MensagemItem },
     computed: {
         ...mapGetters('mensagens', ['mensagensOrdenadas']),
         ...mapGetters('usuario', ['isAuthenticated', 'getToken', 'getUser']),
@@ -27,7 +29,7 @@ export default {
         },
         username() {
             return this.getUser?.username 
-            
+
         }
     },
     watch: {
