@@ -23,29 +23,37 @@ export default {
     },
     actions: {
         conectarWebSocket({ commit, rootState }) {
-            const token = rootState.token; // Corrigido: token está na raiz
+    const token = rootState.usuario.token;
 
-            const cable = connectCable(token);
-            commit('setCable', cable);
+    if (!token) {
+        console.warn('❌ Token ausente. Usuário não autenticado.');
+        return;
+    }
 
-            const subscription = cable.subscriptions.create(
-                { channel: 'ChatChannel' },
-                {
-                    received(data) {
-                        console.log('📩 Mensagem recebida via WebSocket:', data);
-                        commit('addMensagem', data);
-                    },
-                    connected() {
-                        console.log('✅ Conectado ao ChatChannel');
-                    },
-                    disconnected() {
-                        console.log('🔌 Desconectado do ChatChannel');
-                    }
-                }
-            );
+    const cable = connectCable(token);
+    commit('setCable', cable);
 
-            commit('setSubscription', subscription);
-        },
+    const localCommit = commit;
+
+    const subscription = cable.subscriptions.create(
+        { channel: 'ChatChannel' },
+        {
+            received(data) {
+                console.log('📩 Mensagem recebida via WebSocket:', data);
+                localCommit('addMensagem', data); 
+            },
+            connected() {
+                console.log('✅ Conectado ao ChatChannel');
+            },
+            disconnected() {
+                console.log('🔌 Desconectado do ChatChannel');
+            }
+        }
+    );
+
+    commit('setSubscription', subscription);
+},
+
 
         enviarMensagem({ state }, texto) {
             if (state.subscription) {

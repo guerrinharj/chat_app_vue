@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     namespaced: true,
     state: {
@@ -17,10 +19,25 @@ export default {
         }
     },
     actions: {
-        login({ commit }, { user, token }) {
-            commit('setUser', user);
-            commit('setToken', token);
+        async login({ commit }, { login, password }) {
+            try {
+                const response = await axios.post('http://localhost:3000/api/v1/login', {
+                    login,
+                    password
+                });
+
+                const { usuario, token } = response.data;
+
+                commit('setUser', usuario);
+                commit('setToken', token);
+
+                return true; // sucesso
+            } catch (error) {
+                console.error('Erro no login:', error.response?.data || error.message);
+                return false; // falhou
+            }
         },
+
         logout({ commit }) {
             commit('logout');
         }

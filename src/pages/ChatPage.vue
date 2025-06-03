@@ -1,5 +1,6 @@
 <template>
     <div class="chat-page">
+        <h2>Bem-vindo, {{ username }}!</h2>
         <MensagemForm />
         <div class="mensagens">
             <MensagemItem
@@ -20,12 +21,26 @@ export default {
     components: { MensagemForm, MensagemItem },
     computed: {
         ...mapGetters('mensagens', ['mensagensOrdenadas']),
+        ...mapGetters('usuario', ['isAuthenticated', 'getToken', 'getUser']),
         mensagens() {
             return this.mensagensOrdenadas;
+        },
+        username() {
+            return this.getUser?.username 
+            
+        }
+    },
+    watch: {
+        getToken(newToken) {
+            if (newToken) {
+                this.$store.dispatch('mensagens/conectarWebSocket');
+            }
         }
     },
     mounted() {
-        this.$store.dispatch('mensagens/conectarWebSocket');
+        if (this.isAuthenticated && this.getToken) {
+            this.$store.dispatch('mensagens/conectarWebSocket');
+        }
     },
     beforeUnmount() {
         this.$store.dispatch('mensagens/desconectarWebSocket');
