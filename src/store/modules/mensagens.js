@@ -14,19 +14,25 @@ export default {
         addMensagem(state, mensagem) {
             state.mensagens.unshift(mensagem);
         },
+        setCable(state, cable) {
+            state.cable = cable;
+        },
         setSubscription(state, subscription) {
             state.subscription = subscription;
         }
     },
     actions: {
         conectarWebSocket({ commit, rootState }) {
-            const token = rootState.usuario.token;
+            const token = rootState.token; // Corrigido: token está na raiz
 
             const cable = connectCable(token);
+            commit('setCable', cable);
+
             const subscription = cable.subscriptions.create(
                 { channel: 'ChatChannel' },
                 {
                     received(data) {
+                        console.log('📩 Mensagem recebida via WebSocket:', data);
                         commit('addMensagem', data);
                     },
                     connected() {
@@ -37,23 +43,36 @@ export default {
                     }
                 }
             );
+
             commit('setSubscription', subscription);
         },
 
         enviarMensagem({ state }, texto) {
             if (state.subscription) {
                 state.subscription.send({ action: 'speak', texto });
+            } else {
+                console.warn('❌ Nenhuma subscription ativa para enviar mensagem.');
             }
         },
 
-        desconectarWebSocket({ commit }) {
-            disconnectCable();
+        desconectarWebSocket({ state, commit }) {
+            if (state.subscription) {
+                state.subscription.unsubscribe();
+            }
+            if (state.cable) {
+                state.cable.disconnect();
+            }
             commit('setSubscription', null);
+            commit('setCable', null);
         }
     },
     getters: {
         mensagensOrdenadas(state) {
-            return [...state.mensagens].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            return [...state.mensagens].sort((a, b) => {
+                const aDate = new Date(a.created_at || a.createdAt);
+                const bDate = new Date(b.created_at || b.createdAt);
+                return bDate - aDate;
+            });
         }
     }
 };
