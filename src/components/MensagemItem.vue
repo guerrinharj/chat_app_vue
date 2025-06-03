@@ -1,24 +1,18 @@
 <template>
     <div class="mensagem">
         <strong>{{ mensagem.usuario.username }}</strong>: {{ mensagem.texto }}
-        <span class="timestamp">{{ mensagem.created_at }}</span>
-        <div v-if="isMine" class="actions">
-            <button @click="$emit('editar', mensagem)">✏️</button>
-            <button @click="$emit('remover', mensagem)">🗑️</button>
-        </div>
+        <small>{{ formatTime(mensagem.created_at) }}</small>
     </div>
-    </template>
+</template>
 
-    <script>
-    export default {
-    props: {
-        mensagem: Object,
-        usuarioAtualId: Number
-    },
-    computed: {
-        isMine() {
-        return this.mensagem.usuario.id === this.usuarioAtualId;
+<script>
+export default {
+    props: ['mensagem'],
+    methods: {
+        formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString();
         }
     }
-    };
+};
 </script>

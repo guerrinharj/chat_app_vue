@@ -1,40 +1,21 @@
 <template>
-    <form @submit.prevent="submit">
-        <input
-        v-model="texto"
-        placeholder="Digite sua mensagem..."
-        required
-        />
-        <button type="submit">{{ editar ? 'Atualizar' : 'Enviar' }}</button>
-        <button v-if="editar" type="button" @click="cancelar">Cancelar</button>
+    <form @submit.prevent="enviar">
+        <input v-model="texto" placeholder="Digite sua mensagem..." />
+        <button type="submit">Enviar</button>
     </form>
-    </template>
+</template>
 
 <script>
-    export default {
-    props: {
-        editar: Boolean,
-        valorInicial: String
-    },
-    emits: ['enviar', 'cancelar'],
+export default {
     data() {
-        return {
-        texto: this.valorInicial || ''
-        };
-    },
-    watch: {
-        valorInicial(novo) {
-        this.texto = novo;
-        }
+        return { texto: '' };
     },
     methods: {
-        submit() {
-            if (!this.texto.trim()) return;
-                this.$emit('enviar', this.texto);
+        enviar() {
+            if (this.texto.trim()) {
+                this.$store.dispatch('mensagens/enviarMensagem', this.texto);
                 this.texto = '';
-            },
-        cancelar() {
-            this.$emit('cancelar');
+            }
         }
     }
 };
