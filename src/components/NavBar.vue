@@ -1,14 +1,14 @@
 <template>
-    <nav class="bg-gray-800 text-white p-4 flex justify-between items-center">
-        <router-link to="/" class="font-bold text-lg">ChatApp</router-link>
+    <nav class="navbar">
+        <router-link to="/" class="brand">Canal de Mensagens</router-link>
 
-        <div class="flex items-center gap-4">
+        <div class="actions">
             <span v-if="isAuthenticated">Olá, {{ user?.username }}</span>
 
             <router-link
                 v-if="!isAuthenticated"
                 to="/login"
-                class="bg-blue-500 px-3 py-1 rounded hover:bg-blue-600"
+                class="login-btn"
             >
                 Entrar
             </router-link>
@@ -16,7 +16,7 @@
             <button
                 v-if="isAuthenticated"
                 @click="logout"
-                class="bg-red-500 px-3 py-1 rounded hover:bg-red-600"
+                class="logout-btn"
             >
                 Sair
             </button>
@@ -40,3 +40,61 @@ const logout = () => {
     router.push('/login')
 }
 </script>
+
+<style>
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2d3748;
+    color: white;
+    padding: 1rem 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.brand {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: white;
+    text-decoration: none;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-btn,
+.logout-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.login-btn {
+    background-color: #4299e1;
+}
+
+.login-btn:hover {
+    background-color: #3182ce;
+}
+
+.logout-btn {
+    background-color: #f56565;
+}
+
+.logout-btn:hover {
+    background-color: #e53e3e;
+}
+</style>
