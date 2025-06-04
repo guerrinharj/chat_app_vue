@@ -18,6 +18,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import axios from 'axios'
 
 const form = ref({
@@ -30,16 +31,28 @@ const form = ref({
 
 const error = ref(null)
 const router = useRouter()
+const store = useStore()
 
 const register = async () => {
     try {
-        await axios.post('http://localhost:3000/api/v1/usuarios', { usuario: form.value })
-        router.push('/login')
+        await axios.post('http://localhost:3000/api/v1/usuarios', { usuario: form.value });
+
+        const loginSuccess = await store.dispatch('usuario/login', {
+            login: form.value.username,
+            password: form.value.password
+        });
+
+        if (loginSuccess) {
+            router.push('/chat');
+        } else {
+            error.value = 'Usuário criado, mas erro ao fazer login automático.';
+        }
     } catch (err) {
-        error.value = err.response?.data?.errors?.join(', ') || 'Erro ao registrar'
+        error.value = err.response?.data?.errors?.join(', ') || 'Erro ao registrar';
     }
 }
 </script>
+
 
 <style>
 .register-wrapper {

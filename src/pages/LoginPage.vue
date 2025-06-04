@@ -18,9 +18,14 @@
                 <button class="login-button">Entrar</button>
             </form>
             <p v-if="error" class="error-message">{{ error }}</p>
+            <p class="register-link">
+                Não tem uma conta?
+                <router-link to="/register">Crie uma</router-link>
+            </p>
         </div>
     </div>
 </template>
+
 
 
 <script setup>
@@ -113,6 +118,19 @@ const realizarLogin = async () => {
     margin-top: 1rem;
     text-align: center;
 }
+
+.register-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.register-link a {
+    color: #3182ce;
+    text-decoration: underline;
+    margin-left: 4px;
+}
+
 
 @media (max-width: 600px) {
 
