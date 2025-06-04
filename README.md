@@ -15,14 +15,14 @@ Este é o frontend de uma aplicação de chat em tempo real feito como desafio p
 
 
 
-- # Componentes reutilizáveis como formulário e itens de mensagem
-- # Páginas principais: Home, Login, Register, Chat
-- # store/ # Vuex para autenticação e mensagens
-- # router/ # Configuração de rotas com guards de autenticação
-- # utils/ # Funções auxiliares (ex: conexão WebSocket)
-- # App.vue
-- # main.js
-- # style.css
+- Componentes reutilizáveis como formulário e itens de mensagem
+- Páginas principais: **Home**, **Login**, **Register**, **Chat**
+- store/ # Vuex para autenticação e mensagens
+- router/ # Configuração de rotas com guards de autenticação
+- utils/ # Funções auxiliares (ex: conexão WebSocket)
+- App.vue
+- main.js
+- style.css
 
 
 ## 🛠️ Instalação
