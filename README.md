@@ -47,7 +47,7 @@ yarn dev
 ```
 
 
-4.Acesse a aplicação:
+4. Acesse a aplicação:
 
 ```arduino 
 http://localhost:5173
