@@ -1,6 +1,6 @@
 # Canal de Mensagens
 
-Este é o frontend de uma aplicação de chat em tempo real feito como desafio para a <a href="https://github.com/newbytesolucoesdigitais/desafio"> NewByte</a>, construído com **Vue 3**, **Vite**, **Vuex** e **Vue Router**. Ele se conecta a uma API Rails e usa **WebSockets (ActionCable)** para troca de mensagens em tempo real.
+Este é o frontend de uma aplicação de chat em tempo real feito como desafio para a <a href="https://github.com/newbytesolucoesdigitais/desafio"> NewByte</a>, construído com **Vue 3**, **Vite**, **Vuex** e **Vue Router**. Ele se conecta a uma <a href="https://github.com/guerrinharj/chat_app">API Rails feita para o desafio</a> e usa **WebSockets (ActionCable)** para troca de mensagens em tempo real.
 
 ## 🚀 Funcionalidades
 
