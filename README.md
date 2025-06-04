@@ -27,20 +27,15 @@ Este é o frontend de uma aplicação de chat em tempo real, construído com **V
 ### 🔹 Pré-requisitos
 
 - Node.js `>= 18`
-- NPM ou Yarn
+- Yarn
 - A API backend Rails em execução em `http://localhost:3000`
 
 1. Clone o repositório (ou entre na pasta do frontend):
 
 ```bash
-cd chat-app-vue
+cd chat_app_vue
 ```
 2. Instale as dependências:
-
-```bash
-npm install
-```
-ou
 
 ```bash
 yarn
