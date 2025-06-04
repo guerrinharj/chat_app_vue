@@ -11,15 +11,18 @@ Este é o frontend de uma aplicação de chat em tempo real, construído com **V
 - Interface responsiva e moderna
 - Navegação entre páginas com Vue Router
 
-## 🧩 Estrutura do Projeto
+## 🧩 Estrutura do Projeto (src)
 
-├── components/ # Componentes reutilizáveis como formulário e itens de mensagem
-├── pages/ # Páginas principais: Home, Login, Register, Chat
-├── store/ # Vuex para autenticação e mensagens
-├── router/ # Configuração de rotas com guards de autenticação
-├── utils/ # Funções auxiliares (ex: conexão WebSocket)
-├── App.vue
-└── main.js
+
+
+- # Componentes reutilizáveis como formulário e itens de mensagem
+- # Páginas principais: Home, Login, Register, Chat
+- # store/ # Vuex para autenticação e mensagens
+- # router/ # Configuração de rotas com guards de autenticação
+- # utils/ # Funções auxiliares (ex: conexão WebSocket)
+- # App.vue
+- # main.js
+- # style.css
 
 
 ## 🛠️ Instalação
