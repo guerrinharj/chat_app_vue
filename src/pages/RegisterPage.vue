@@ -21,6 +21,8 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import axios from 'axios'
 
+const API_URL = import.meta.env.VITE_API_BASE_URL
+
 const form = ref({
     nome: '',
     username: '',
@@ -35,7 +37,7 @@ const store = useStore()
 
 const register = async () => {
     try {
-        await axios.post('http://localhost:3000/api/v1/usuarios', { usuario: form.value });
+        await axios.post(`${API_URL}/usuarios`, { usuario: form.value });
 
         const loginSuccess = await store.dispatch('usuario/login', {
             login: form.value.username,

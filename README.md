@@ -13,8 +13,6 @@ Este é o frontend de uma aplicação de chat em tempo real feito como desafio p
 
 ## 🧩 Estrutura do Projeto (src)
 
-
-
 - Componentes reutilizáveis como formulário e itens de mensagem
 - Páginas principais: **Home**, **Login**, **Register**, **Chat**
 - store/ # Vuex para autenticação e mensagens
@@ -24,10 +22,31 @@ Este é o frontend de uma aplicação de chat em tempo real feito como desafio p
 - main.js
 - style.css
 
+## Configuração do .env
 
-## 🛠️ Instalação
+Para que a aplicação saiba para onde enviar as requisições HTTP e onde se conectar via WebSocket, você precisa criar um arquivo ```.env``` na raiz do projeto com as URLs da sua API e WebSocket.
 
-### 🔹 Pré-requisitos
+Crie um arquivo chamado ```.env``` com o seguinte conteúdo:
+
+```bash
+VITE_API_BASE_URL=http://localhost:3000/api/v1
+VITE_WS_URL=ws://localhost:3000/cable
+```
+
+Em produção, lembre-se de usar https e wss:
+
+```bash
+VITE_API_BASE_URL=https://sua-api.com/api/v1
+VITE_WS_URL=wss://sua-api.com/cable
+```
+
+```bash
+yarn dev
+```
+
+##  Instalação
+
+###  Pré-requisitos
 
 - Node.js `>= 18`
 - Yarn
